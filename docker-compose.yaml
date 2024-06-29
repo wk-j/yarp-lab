@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  myapp1:
+    build:
+      context: .
+      dockerfile: docker/MyApp1.Dockerfile
+    ports:
+      - "8081:8080"
+
+  myapp2:
+    build:
+      context: .
+      dockerfile: docker/MyApp2.Dockerfile
+    ports:
+      - "8082:8080"
+
+  myproxy:
+    build:
+      context: .
+      dockerfile: docker/MyProxy.Dockerfile
+    ports:
+      - "8080:8080"

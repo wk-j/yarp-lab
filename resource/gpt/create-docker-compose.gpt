@@ -1,0 +1,9 @@
+Tools: sys.read, sys.write
+
+Create `docker-compose.yaml` for building follow docker projects
+
+- docker/MyApp1.Dockerfile
+- docker/MyApp2.Dockerfile
+- docker/MyProxy.Dockerfile
+
+* The default port of .NET 8.0 container also changed from port 80 to 8080

@@ -1,0 +1,9 @@
+Tools: sys.read, sys.write
+
+Create docker file for following .NET 8.0 project.
+
+1. `docker/MyProxy.Dockerfile` for src/MyProxy/MyProxy.csproj
+2. `docker/MyApp1.Dockerfile` for src/MyApp1/MyApp1.csproj
+3. `docker/MyApp2.Dockerfile` for src/MyApp2/MyApp2.csproj
+
+* The default port of .NET 8.0 container also changed from port 80 to 8080
