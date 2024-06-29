@@ -9,6 +9,7 @@ public class Program
         var builder = CreateHostBuilder(args);
         builder.Configuration.AddJsonFile("appsettings.json");
         builder.Configuration.AddJsonFile("appsettings.proxy.json");
+        builder.Configuration.AddJsonFile("appsettings.jwt.json");
 
         var startup = new Startup(builder.Configuration);
         startup.ConfigureServices(builder.Services);
