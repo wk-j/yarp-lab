@@ -1,3 +1,5 @@
+using Yarp.ReverseProxy;
+
 public class Startup
 {
     public IConfiguration Configuration { get; }
@@ -12,6 +14,8 @@ public class Startup
         _ = services.AddEndpointsApiExplorer();
         _ = services.AddSwaggerGen();
         _ = services.AddControllers();
+        _ = services.AddReverseProxy()
+            .LoadFromConfig(Configuration.GetSection("ReverseProxy"));
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -22,7 +26,7 @@ public class Startup
             _ = app.UseSwaggerUI();
         }
 
-        _ = app.UseHttpsRedirection();
+        // _ = app.UseHttpsRedirection();
 
         var summaries = new[]
         {
@@ -35,5 +39,6 @@ public class Startup
         {
             options.MapControllers();
         });
+
     }
 }

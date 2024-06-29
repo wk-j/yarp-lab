@@ -1,18 +1,27 @@
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
+using Yarp.ReverseProxy;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        CreateHostBuilder(args).Build().Run();
+        var builder = CreateHostBuilder(args);
+        builder.Configuration.AddJsonFile("appsettings.json");
+        builder.Configuration.AddJsonFile("appsettings.proxy.json");
+
+        var startup = new Startup(builder.Configuration);
+        startup.ConfigureServices(builder.Services);
+
+        var app = builder.Build();
+        startup.Configure(app, app.Environment);
+
+        _ = app.MapReverseProxy();
+        app.Run();
     }
 
-    public static IHostBuilder CreateHostBuilder(string[] args)
+    public static WebApplicationBuilder CreateHostBuilder(string[] args)
     {
-        return Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                _ = webBuilder.UseStartup<Startup>();
-            });
+        return WebApplication.CreateBuilder(args);
     }
 }
