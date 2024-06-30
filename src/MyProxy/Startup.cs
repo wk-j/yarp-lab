@@ -1,3 +1,5 @@
+namespace MyProxy;
+
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -18,7 +20,11 @@ public class Startup
         _ = services.AddSwaggerGen();
         _ = services.AddControllers();
         _ = services.AddReverseProxy()
-            .LoadFromConfig(Configuration.GetSection("ReverseProxy"));
+            .LoadFromConfig(Configuration.GetSection("ReverseProxy"))
+            .AddTransforms(builderContext =>
+            {
+                builderContext.RequestTransforms.Add(new JwtTransform());
+            });
 
         _ = services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

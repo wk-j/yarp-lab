@@ -18,11 +18,12 @@ public class JwtService(IConfiguration configuration)
         return Convert.ToBase64String(keyBytes);
     }
 
-    public string GenerateJwtToken(string userId, IList<string> roles)
+    public string GenerateJwtToken(string userId, string ticket, IList<string> roles)
     {
         var claims = new List<Claim> {
-        new Claim(JwtRegisteredClaimNames.Sub, userId),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(JwtRegisteredClaimNames.Sub, userId),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim("x-user-ticket", ticket)
         };
 
         // Add role claims

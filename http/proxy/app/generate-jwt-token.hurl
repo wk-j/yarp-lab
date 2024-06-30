@@ -1,4 +1,4 @@
-POST http://localhost:5274/api/app/generate-jwt-token
+POST http://localhost:8080/api/app/generate-jwt-token
 Cotnent-Type: application/json
 
 {

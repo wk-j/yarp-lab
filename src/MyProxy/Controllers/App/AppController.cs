@@ -22,6 +22,6 @@ public class AppController : ControllerBase
     [HttpPost("generate-jwt-token")]
     public string GenerateJwtToken([FromServices] JwtService jwt, [FromBody] UserInfo info)
     {
-        return jwt.GenerateJwtToken(info.UserId, info.Roles);
+        return jwt.GenerateJwtToken(info.UserId, "abc", info.Roles);
     }
 }

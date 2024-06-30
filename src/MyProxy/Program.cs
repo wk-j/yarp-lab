@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
+using MyProxy;
 using Yarp.ReverseProxy;
 
 public class Program
@@ -18,6 +19,7 @@ public class Program
         startup.Configure(app, app.Environment);
 
         _ = app.MapReverseProxy();
+
         app.Run();
     }
 
