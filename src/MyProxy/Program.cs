@@ -8,6 +8,7 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = CreateHostBuilder(args);
+
         builder.Configuration.AddJsonFile("appsettings.json");
         builder.Configuration.AddJsonFile("appsettings.proxy.json");
         builder.Configuration.AddJsonFile("appsettings.jwt.json");
@@ -18,13 +19,18 @@ public class Program
         var app = builder.Build();
         startup.Configure(app, app.Environment);
 
-        _ = app.MapReverseProxy();
-
         app.Run();
     }
 
     public static WebApplicationBuilder CreateHostBuilder(string[] args)
     {
-        return WebApplication.CreateBuilder(args);
+        var options = new WebApplicationOptions
+        {
+            ApplicationName = "MyProxy",
+            Args = args,
+            WebRootPath = "wwwroot/next"
+        };
+
+        return WebApplication.CreateBuilder(options);
     }
 }

@@ -50,13 +50,16 @@ public class Startup
         _ = services.AddSingleton<JwtService>();
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(WebApplication app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())
         {
             _ = app.UseSwagger();
             _ = app.UseSwaggerUI();
         }
+
+        app.UseDefaultFiles();
+        app.UseStaticFiles();
 
         _ = app.UseAuthentication();
         _ = app.UseRouting();
@@ -65,5 +68,7 @@ public class Startup
         {
             options.MapControllers();
         });
+
+        _ = app.MapReverseProxy();
     }
 }
